@@ -70,52 +70,26 @@ counterMaker();
 // Return an object that has two methods called `increment` and `decrement`.
 //   // `increment` should increment a counter variable in closure scope and return it.
 //   // `decrement` should decrement the counter variable and return it.
-// const counterFactory = (operation) => {
-//   
-
-//   const changeValue = {
-//     increment: function() {
-//       count2 += 1;
-//       return count2;
-//     },
-//     decrement: function() {
-//       count2 -= 1;
-//       return count2;
-//     }
-//   }
-
-//   let keyword = operation;
-
-//   if (keyword === "increment"){
-//     console.log(changeValue.increment());
-//   } else if (keyword === "decrement"){
-//     console.log(changeValue.decrement());
-//   }
-// };
-
-// let count2 = 0;
-// counterFactory("increment");
-// counterFactory("increment");
-// counterFactory("increment");
-// counterFactory("decrement");
-
-let count2 = 0;
 
 const counterFactory = () => {
+  let currentVal = 0;
+
   return {
-    increment: function(value, integer) {
-      value += integer;
-      return value;
+    increment: function(integer) {
+      currentVal += integer;
+      return currentVal;
     },
-    decrement: function(value, integer) {
-      value -= integer;
-      return value;
+    decrement: function(integer) {
+      currentVal -= integer;
+      return currentVal;
     }
   }
-  console.log(value);
 };
 
 const newCounter = counterFactory();
 
-newCounter.increment(count2, 1);
-newCounter.increment(count2, 2);
+console.log(newCounter.increment(1));
+console.log(newCounter.increment(2));
+console.log(newCounter.decrement(1));
+console.log(newCounter.increment(3));
+console.log(newCounter.decrement(4));
