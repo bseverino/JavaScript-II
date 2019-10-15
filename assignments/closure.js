@@ -102,23 +102,20 @@ counterMaker();
 let count2 = 0;
 
 const counterFactory = () => {
-  const object = {
+  return {
     increment: function(value, integer) {
       value += integer;
-      console.log(value);
+      return value;
     },
     decrement: function(value, integer) {
       value -= integer;
-      console.log(value);
+      return value;
     }
   }
-  return object;
+  console.log(value);
 };
 
 const newCounter = counterFactory();
-const oneCounter = function() {
-  
-}
 
 newCounter.increment(count2, 1);
 newCounter.increment(count2, 2);
