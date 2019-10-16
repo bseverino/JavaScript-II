@@ -57,29 +57,94 @@ const runners = [
 
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs. Combine both the first and last names and populate a new array called `fullNames`. This array will contain just strings.
-let fullNames = [];
+let fullNames = []; 
+runners.forEach(function(currentValue){
+  fullNames.push(`${currentValue.first_name} ${currentValue.last_name}`);
+});
 console.log(fullNames);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runners' first names in uppercase because the director BECAME DRUNK WITH POWER. Populate an array called `firstNamesAllCaps`. This array will contain just strings.
-let firstNamesAllCaps = [];
+let firstNamesAllCaps = runners.map(function(currentValue){
+  return currentValue.first_name.toUpperCase();
+});
 console.log(firstNamesAllCaps);
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue. We need a filtered version of the runners array, containing only those runners with large sized shirts so they can choose a different size. This will be an array of objects.
-let runnersLargeSizeShirt = [];
+let runnersLargeSizeShirt = runners.filter(function(currentValue){
+  return currentValue.shirt_size === "L";
+});
 console.log(runnersLargeSizeShirt);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations and save the total into a ticketPriceTotal variable.
-let ticketPriceTotal = 0;
+let ticketPriceTotal = runners.reduce(function(acc, currentValue){
+  return acc + currentValue.donation;
+}, 0);
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
-// Problem 1
+// Problem 1 - Add the total donations made from the company Skinix
 
-// Problem 2
+let skinixDonations = runners.reduce(function(acc, currentValue){
+  if (currentValue.company_name === "Skinix") {
+    return acc + currentValue.donation;
+  } else return acc;
+}, 0);
+console.log(skinixDonations);
 
-// Problem 3
+// Problem 2 - Tally each individual size and put that information in a string
+
+let totalXSmall = runners.reduce(function(acc, currentValue){
+  if (currentValue.shirt_size === "XS"){
+    return acc + 1;
+  } else return acc;
+}, 0);
+
+let totalSmall = runners.reduce(function(acc, currentValue){
+  if (currentValue.shirt_size === "S"){
+    return acc + 1;
+  } else return acc;
+}, 0);
+
+let totalMed = runners.reduce(function(acc, currentValue){
+  if (currentValue.shirt_size === "M"){
+    return acc + 1;
+  } else return acc;
+}, 0);
+
+let totalLarge = runners.reduce(function(acc, currentValue){
+  if (currentValue.shirt_size === "L"){
+    return acc + 1;
+  } else return acc;
+}, 0);
+
+let totalXLarge = runners.reduce(function(acc, currentValue){
+  if (currentValue.shirt_size === "XL"){
+    return acc + 1;
+  } else return acc;
+}, 0);
+
+let total2XLarge = runners.reduce(function(acc, currentValue){
+  if (currentValue.shirt_size === "2XL"){
+    return acc + 1;
+  } else return acc;
+}, 0);
+
+let total3XLarge = runners.reduce(function(acc, currentValue){
+  if (currentValue.shirt_size === "3XL"){
+    return acc + 1;
+  } else return acc;
+}, 0);
+
+console.log(`We need ${totalXSmall} XS, ${totalSmall} S, ${totalMed} M, ${totalLarge} L, ${totalXLarge} XL, ${total2XLarge} 2XL, and ${total3XLarge} 3XL.`);
+
+// Problem 3 - Create a new array including each runner's ID and last name.
+
+let idRunner = runners.map(function(currentValue){
+  return `${currentValue.id}: ${currentValue.last_name}`;
+});
+console.log(idRunner);

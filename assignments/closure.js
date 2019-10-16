@@ -4,6 +4,24 @@
 // that manipulates variables defined in the outer scope.
 // The outer scope can be a parent function, or the top level of the script.
 
+function parent(parentName, childName, grandchildName) {
+  console.log(`Hi, my name is ${parentName}.`);
+  // debugger;
+
+  function child(){
+    console.log(`Hi, my name is ${childName}. My mother's name is ${parentName}.`);
+    // debugger;
+
+    function grandchild(){
+      console.log(`Hi, my name is ${grandchildName}. My mother's name is ${childName}, and my grandmother's name is ${parentName}.`);
+      // debugger;
+
+    }; //grandchild
+    grandchild();
+  }; //child
+  child();
+}; //parent
+parent("Geraldine", "Tara", "Bianca");
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
 
@@ -16,7 +34,30 @@ const counterMaker = () => {
   //      NOTE: This `counter` function, being nested inside `counterMaker`,
   //      "closes over" the `count` variable. It can "see" it in the parent scope!
   // 3- Return the `counter` function.
+
+  function counter(){
+    if (count < 5) {
+      count += 1;
+      return count;
+    } else {
+      count = 1;
+      return count;
+    }
+  };
+
+  counter();
+  console.log(count);
 };
+
+let count = 0;
+
+counterMaker();
+counterMaker();
+counterMaker();
+counterMaker();
+counterMaker();
+counterMaker();
+
 // Example usage: const myCounter = counterMaker();
 // myCounter(); // 1
 // myCounter(); // 2
@@ -26,8 +67,29 @@ const counterMaker = () => {
 // will refuse to go over the limit, and start back at 1.
 
 // ==== Challenge 4: Create a counter function with an object that can increment and decrement ====
+// Return an object that has two methods called `increment` and `decrement`.
+//   // `increment` should increment a counter variable in closure scope and return it.
+//   // `decrement` should decrement the counter variable and return it.
+
 const counterFactory = () => {
-  // Return an object that has two methods called `increment` and `decrement`.
-  // `increment` should increment a counter variable in closure scope and return it.
-  // `decrement` should decrement the counter variable and return it.
+  let currentVal = 0;
+
+  return {
+    increment: function(integer) {
+      currentVal += integer;
+      return currentVal;
+    },
+    decrement: function(integer) {
+      currentVal -= integer;
+      return currentVal;
+    }
+  }
 };
+
+const newCounter = counterFactory();
+
+console.log(newCounter.increment(1));
+console.log(newCounter.increment(2));
+console.log(newCounter.decrement(1));
+console.log(newCounter.increment(3));
+console.log(newCounter.decrement(4));
